@@ -14,6 +14,8 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+ATTEMPTS = 5
+
 
 users: dict[int, User] = {}
 
@@ -21,7 +23,7 @@ users: dict[int, User] = {}
 @dp.message(CommandStart())
 async def process_start_command(message: Message):
     if message.from_user.id not in users:
-        users[message.from_user.id] = User(message.from_user.id)
+        users[message.from_user.id] = User(message.from_user.id, ATTEMPTS)
     await message.answer(
         'Привет!\nДавайте сыграем в игру "Угадай число"?\n\n'
         "Чтобы получить правила игры и список доступных "

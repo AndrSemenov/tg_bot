@@ -3,7 +3,6 @@ import random
 
 # users Data
 class User:
-
     """
     Класс для хранения информации об одном игроке:
     - id: Telegram user ID
@@ -14,10 +13,10 @@ class User:
     - wins: победы
     """
 
-    def __init__(self, user_id):
+    def __init__(self, user_id, attempts):
         self.ingame = False
         self.secret_number = None
-        self.attempts = None
+        self.total_attempts = attempts
         self.total_games = 0
         self.wins = 0
         self.id = user_id
@@ -25,7 +24,7 @@ class User:
     def start_game(self):
         self.ingame = True
         self.secret_number = random.randint(1, 100)
-        self.attempts = 5
+        self.attempts = self.total_attempts
 
     def win(self):
         self.ingame = False
